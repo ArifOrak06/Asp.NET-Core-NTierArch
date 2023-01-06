@@ -12,9 +12,9 @@ namespace NTierApp.Core.Services
         Task<T> GetByIdAsync(int id);
         IQueryable<T> Where(Expression<Func<T, bool>> expression); // filtreleme operasyonları
         Task<IEnumerable<T>> GetAllAsync();
-        Task<bool> AnyAsync(Expression<Func<T, bool>> exporession);
-        Task AddRangeAsnyc(IEnumerable<T> dtos);
-        Task AddAsync(T dto);
+        Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> AddRangeAsnyc(IEnumerable<T> dtos);
+        Task<T> AddAsync(T dto);
         Task UpdateAsync(T dto);
         Task DeleteAsync(T dto);
         Task DeleteRangeAsync(IEnumerable<T> dtos);
