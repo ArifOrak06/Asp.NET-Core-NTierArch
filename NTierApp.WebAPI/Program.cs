@@ -10,6 +10,7 @@ using NTierApp.Repository.UnitOfWorks;
 using NTierApp.Service.Mappings.AutoMapper;
 using NTierApp.Service.Services;
 using NTierApp.Service.Validations;
+using NTierApp.WebAPI.Middlewares;
 using NTierApp.WebAPI.ValidationFilters;
 using System.Reflection;
 
@@ -65,6 +66,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCustomException();
 
 app.UseAuthorization();
 
