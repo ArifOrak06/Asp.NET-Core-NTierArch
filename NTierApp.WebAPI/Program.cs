@@ -10,6 +10,7 @@ using NTierApp.Repository.UnitOfWorks;
 using NTierApp.Service.Mappings.AutoMapper;
 using NTierApp.Service.Services;
 using NTierApp.Service.Validations;
+using NTierApp.WebAPI.Filters;
 using NTierApp.WebAPI.Middlewares;
 using NTierApp.WebAPI.ValidationFilters;
 using System.Reflection;
@@ -32,7 +33,7 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));

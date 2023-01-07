@@ -2,6 +2,7 @@
 using NTierApp.Core.Repositories;
 using NTierApp.Core.Services;
 using NTierApp.Core.UnitOfWorks;
+using NTierApp.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,12 @@ namespace NTierApp.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var existEntity = await _repository.GetByIdAsync(id);
+            if (existEntity == null )
+            {
+                throw new NotFoundException($"{typeof(T).Name}({id}) bulunamadı");
+            }
+            return existEntity;
         }
 
         public async Task UpdateAsync(T dto)

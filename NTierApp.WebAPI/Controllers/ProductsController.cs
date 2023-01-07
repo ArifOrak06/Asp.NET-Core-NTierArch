@@ -5,6 +5,7 @@ using NTierApp.Core.DTOs;
 using NTierApp.Core.Entities;
 using NTierApp.Core.ResultPattern;
 using NTierApp.Core.Services;
+using NTierApp.WebAPI.Filters;
 
 namespace NTierApp.WebAPI.Controllers
 {
@@ -35,6 +36,7 @@ namespace NTierApp.WebAPI.Controllers
             var productsDtos = _mapper.Map<List<ProductDto>>(products.ToList());
             return CreateActionResult(CustomResponseDto<List<ProductDto>>.Success(200, productsDtos));
         }
+        [ServiceFilter(typeof(NotFoundFilter<Product>))]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

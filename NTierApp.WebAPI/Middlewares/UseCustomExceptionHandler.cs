@@ -17,8 +17,9 @@ namespace NTierApp.WebAPI.Middlewares
                     var exceptionFeature = context.Features.Get<IExceptionHandlerFeature>();
 
                     var statusCode = exceptionFeature.Error switch
-                    { // Hata Client tabanlı bir hata ise 400, uygulama kaynaklı bir hata ise 500
+                    { // Hata Client tabanlı bir hata ise 400 ve 404, uygulama kaynaklı bir hata ise 500
                         ClientSideException => 400,
+                        NotFoundException => 404,
                         _ => 500
                     };
                     // Yukarıda oluşturulan statusCode Response'a ekleyelim.
