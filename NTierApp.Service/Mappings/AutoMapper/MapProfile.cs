@@ -17,6 +17,9 @@ namespace NTierApp.Service.Mappings.AutoMapper
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<ProductFeature, ProductFeatureDto>().ReverseMap();
             CreateMap<ProductUpdateDto, Product>();
+            CreateMap<ProductWithCategoriesDto, Product>().ReverseMap();
+            CreateMap<CategoryWithProductsDto, Category>();
+
         }
     }
 }
