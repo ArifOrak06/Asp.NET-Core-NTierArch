@@ -6,4 +6,8 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NTierApp.Service\NTierApp.Service.csproj" />
+  </ItemGroup>
+
 </Project>
