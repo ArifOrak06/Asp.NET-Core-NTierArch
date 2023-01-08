@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace NTierApp.Service.Services
 {
-    public class ProductService : Service<Product>, IProductService
+    public class ProductServiceWithNoCaching : Service<Product>, IProductService
     {
         private readonly IMapper _mapper;
         private readonly IProductRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        public ProductService(IProductRepository repository,IUnitOfWork unitOfWork, IMapper mapper): base(repository, unitOfWork)
+        public ProductServiceWithNoCaching(IProductRepository repository,IUnitOfWork unitOfWork, IMapper mapper): base(repository, unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;

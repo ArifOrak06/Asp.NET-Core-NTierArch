@@ -1,6 +1,7 @@
 ﻿
 
 using Autofac;
+using NTierApp.Caching.Services.ProductCache;
 using NTierApp.Core.Repositories;
 using NTierApp.Core.Services;
 using NTierApp.Core.UnitOfWorks;
@@ -39,7 +40,9 @@ namespace NTierApp.WebAPI.Modules
                                                                                      .AsImplementedInterfaces()
                                                                                      .InstancePerLifetimeScope();
 
+            // IProductService istenildiğinde ProductServiceWithCaching çalışması gerekmektedir.
 
+            builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
         }
 
     }

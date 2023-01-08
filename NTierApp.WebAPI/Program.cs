@@ -34,7 +34,8 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+// MemoryCache aktif edildi--------------------------------------------
+builder.Services.AddMemoryCache();
 
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
@@ -56,6 +57,7 @@ builder.Host.UseServiceProviderFactory
     (new AutofacServiceProviderFactory());
 // RepoModule'ün dahil edilmesi.
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new NTierApp.WebAPI.Modules.RepoServiceModule()));
+
 
 var app = builder.Build();
 
