@@ -1,3 +1,5 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,19 +35,11 @@ builder.Services.Configure<ApiBehaviorOptions>(opt =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 builder.Services.AddAutoMapper(typeof(MapProfile));
-
-//CustomService
-builder.Services.AddScoped<IProductRepository,ProductRepository>();
-builder.Services.AddScoped<IProductService,ProductService>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-// context
-
+ 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), options =>
@@ -56,6 +50,12 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
         options.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     });
 });
+
+// autoFac 
+builder.Host.UseServiceProviderFactory
+    (new AutofacServiceProviderFactory());
+// RepoModule'ün dahil edilmesi.
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => containerBuilder.RegisterModule(new NTierApp.WebAPI.Modules.RepoServiceModule()));
 
 var app = builder.Build();
 

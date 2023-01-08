@@ -49,7 +49,8 @@ namespace NTierApp.WebAPI.Controllers
         {
             var product = _mapper.Map<Product>(dto);
             await _service.AddAsync(product);
-            return CreateActionResult(CustomResponseDto<Product>.Success(201, product));
+            var productDto = _mapper.Map<ProductDto>(product);
+            return CreateActionResult(CustomResponseDto<ProductDto>.Success(201,productDto ));
         }
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto dto)
